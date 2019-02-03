@@ -2,8 +2,6 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -20,7 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FrontPageController extends Controller{
+/**
+ * Controls front_page.fxml
+ *
+ * @author Eric Pedrido
+ */
+public class FrontPageController extends Controller {
     @FXML public Button addButton, playButton, quitButton;
     @FXML public TextField nameTextField;
     @FXML public ComboBox<String> avatarComboBox;
@@ -28,9 +31,9 @@ public class FrontPageController extends Controller{
     @FXML public ListView<ImageView> avatarListView;
     @FXML public AnchorPane anchorPane;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Set-up empty observable lists
         ObservableList<PlayerListCell> emptyPlayers = FXCollections.observableArrayList();
         ObservableList<ImageView> emptyAvatars = FXCollections.observableArrayList();
         namesListView.setItems(emptyPlayers);
@@ -38,20 +41,33 @@ public class FrontPageController extends Controller{
 
         populateComboBox();
 
+        // set listeners and on-action events
         nameTextField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
         addButton.setOnAction(event -> onAddClicked());
     }
 
+    /**
+     * Takes the entered name and selected avatar, and adds it to the list
+     * of players.
+     *
+     * There can be a maximum of 4 players at a time and avatars must be unique.
+     * After 4 players are added to the list, users are restricted from adding any more.
+     *
+     * Also clears {@link #nameTextField} for ease of use.
+     */
     private void onAddClicked() {
+        // Setup the image of the avatar
         String avatar = avatarComboBox.getSelectionModel().getSelectedItem();
         ImageView image = new ImageView(new Image(avatar));
         image.setPreserveRatio(true);
-        image.setFitHeight(30);
+        image.setFitHeight(35);
         image.setFitWidth(50);
 
+        // Add name and avatar to their respective lists
         namesListView.getItems().add(new PlayerListCell(nameTextField.getText()));
         avatarListView.getItems().add(image);
 
+        // Restrict users from exceeding maximum player count
         if (namesListView.getItems().size() == 4) {
             nameTextField.setPromptText("Max Players Reached");
             nameTextField.setDisable(true);
@@ -62,10 +78,14 @@ public class FrontPageController extends Controller{
         addButton.setDisable(true);
         playButton.setDisable(false);
 
+        // Ensure each avatar is unique
         avatarComboBox.getItems().remove(avatar);
         avatarComboBox.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Setup {@link #avatarComboBox} with all avatars.
+     */
     private void populateComboBox() {
         List<String> avatars = new ArrayList<>();
 

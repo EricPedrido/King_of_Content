@@ -27,3 +27,11 @@
     -fx-prompt-text-fill: #777777;
     -fx-text-fill: #444444;
 }
+
+.edit-delete {
+    -fx-background-color: TRANSPARENT;
+}
+
+#deleteButton {
+    -fx-text-fill: RED;
+}

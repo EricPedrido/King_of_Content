@@ -15,16 +15,16 @@
             <Image url="@logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="addButton" disable="true" layoutX="811.0" layoutY="246.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="125.0" styleClass="base" text="Add Player">
+      <Button fx:id="addButton" disable="true" layoutX="811.0" layoutY="278.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="125.0" styleClass="base" text="Add Player">
       </Button>
-      <TextField fx:id="nameTextField" layoutX="379.0" layoutY="246.0" prefHeight="59.0" prefWidth="320.0" promptText="Enter Name Here..." styleClass="base">
+      <TextField fx:id="nameTextField" layoutX="379.0" layoutY="278.0" prefHeight="59.0" prefWidth="320.0" promptText="Enter Name Here..." styleClass="base">
       </TextField>
-      <ListView fx:id="namesListView" layoutX="467.0" layoutY="331.0" prefHeight="291.0" prefWidth="469.0" styleClass="base" />
-      <ListView fx:id="avatarListView" layoutX="379.0" layoutY="331.0" prefHeight="291.0" prefWidth="89.0" styleClass="base" />
-      <Button fx:id="playButton" disable="true" layoutX="472.0" layoutY="641.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="148.0" styleClass="play-quit, base" text="Play">
+      <ListView fx:id="namesListView" layoutX="467.0" layoutY="377.0" prefHeight="183.0" prefWidth="469.0" styleClass="base" />
+      <ListView fx:id="avatarListView" layoutX="379.0" layoutY="377.0" prefHeight="183.0" prefWidth="89.0" styleClass="base" />
+      <Button fx:id="playButton" disable="true" layoutX="472.0" layoutY="601.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="148.0" styleClass="play-quit, base" text="Play">
       </Button>
-      <Button fx:id="quitButton" layoutX="695.0" layoutY="641.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="148.0" styleClass="play-quit, base" text="Quit">
+      <Button fx:id="quitButton" layoutX="695.0" layoutY="601.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="148.0" styleClass="play-quit, base" text="Quit">
       </Button>
-      <ComboBox fx:id="avatarComboBox" layoutX="710.0" layoutY="247.0" prefHeight="59.0" prefWidth="89.0" styleClass="base" />
+      <ComboBox fx:id="avatarComboBox" layoutX="710.0" layoutY="279.0" prefHeight="59.0" prefWidth="89.0" styleClass="base" />
    </children>
 </AnchorPane>
