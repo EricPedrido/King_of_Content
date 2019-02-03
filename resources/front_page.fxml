@@ -19,7 +19,8 @@
       </Button>
       <TextField fx:id="nameTextField" layoutX="379.0" layoutY="246.0" prefHeight="59.0" prefWidth="320.0" promptText="Enter Name Here..." styleClass="base">
       </TextField>
-      <ListView fx:id="namesListView" layoutX="379.0" layoutY="331.0" prefHeight="291.0" prefWidth="557.0" styleClass="base" />
+      <ListView fx:id="namesListView" layoutX="467.0" layoutY="331.0" prefHeight="291.0" prefWidth="469.0" styleClass="base" />
+      <ListView fx:id="avatarListView" layoutX="379.0" layoutY="331.0" prefHeight="291.0" prefWidth="89.0" styleClass="base" />
       <Button fx:id="playButton" disable="true" layoutX="472.0" layoutY="641.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="148.0" styleClass="play-quit, base" text="Play">
       </Button>
       <Button fx:id="quitButton" layoutX="695.0" layoutY="641.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="148.0" styleClass="play-quit, base" text="Quit">

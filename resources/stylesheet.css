@@ -10,12 +10,12 @@
     -fx-font-family: "Russo One";
     -fx-base: #fbb03b;
     -fx-background-radius: 0;
+    -fx-font-size: 17;
 }
 
 .button {
     -fx-text-fill: #fbb03b;
     -fx-base: #444444;
-    -fx-font-size: 17;
 }
 
 .play-quit {
@@ -26,8 +26,4 @@
     -fx-font-size: 19;
     -fx-prompt-text-fill: #777777;
     -fx-text-fill: #444444;
-}
-
-#avatarComboBox {
-    -fx-font-size: 17;
 }
