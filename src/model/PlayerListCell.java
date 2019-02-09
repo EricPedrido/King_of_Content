@@ -1,5 +1,6 @@
 package model;
 
+import controllers.FrontPageController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -17,10 +18,10 @@ public class PlayerListCell extends HBox {
     private final Button _edit = new Button("Edit");
     private final Button _delete = new Button("❌");
 
-    public PlayerListCell(String name) {
+    public PlayerListCell(Player player) {
         super();
 
-        _name.setText("    " + name);
+        _name.setText("    " + player.getName());
         _name.setMaxWidth(Double.MAX_VALUE);
         _name.setTranslateY(7.5); // Place text roughly in the centre
         HBox.setHgrow(_name, Priority.ALWAYS);
@@ -28,6 +29,7 @@ public class PlayerListCell extends HBox {
         _edit.getStyleClass().add("edit-delete");
         _edit.setOnMouseEntered(event -> _edit.setStyle("-fx-background-color: #fbb03b; -fx-text-fill: white"));
         _edit.setOnMouseExited(event -> _edit.setStyle("")); // Reset style to that in the stylesheet
+        _edit.setOnAction(event -> FrontPageController.getInstance().onEditClicked(player, this));
 
         _delete.getStyleClass().add("edit-delete");
         _delete.setId("deleteButton");

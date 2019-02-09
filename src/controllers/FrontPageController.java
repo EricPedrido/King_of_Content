@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.AvatarListCell;
+import model.Player;
 import model.PlayerListCell;
 
 import java.net.URL;
@@ -31,8 +32,14 @@ public class FrontPageController extends Controller {
     @FXML public ListView<ImageView> avatarListView;
     @FXML public AnchorPane anchorPane;
 
+    private static FrontPageController INSTANCE;
+
+    private List<Player> _players;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        INSTANCE = this;
+        _players = new ArrayList<>();
         // Set-up empty observable lists
         ObservableList<PlayerListCell> emptyPlayers = FXCollections.observableArrayList();
         ObservableList<ImageView> emptyAvatars = FXCollections.observableArrayList();
@@ -57,14 +64,20 @@ public class FrontPageController extends Controller {
      */
     private void onAddClicked() {
         // Setup the image of the avatar
+        String name = nameTextField.getText();
         String avatar = avatarComboBox.getSelectionModel().getSelectedItem();
+
         ImageView image = new ImageView(new Image(avatar));
         image.setPreserveRatio(true);
         image.setFitHeight(35);
         image.setFitWidth(50);
+        image.setId(avatar);
+
+        Player player = new Player(name, image);
+        _players.add(player);
 
         // Add name and avatar to their respective lists
-        namesListView.getItems().add(new PlayerListCell(nameTextField.getText()));
+        namesListView.getItems().add(new PlayerListCell(player));
         avatarListView.getItems().add(image);
 
         // Restrict users from exceeding maximum player count
@@ -81,6 +94,23 @@ public class FrontPageController extends Controller {
         // Ensure each avatar is unique
         avatarComboBox.getItems().remove(avatar);
         avatarComboBox.getSelectionModel().selectFirst();
+    }
+
+    public void onEditClicked(Player player, PlayerListCell cell) {
+        removePlayer(player, cell);
+
+        String name = player.getName();
+        String avatarName = player.getAvatar().getId();
+
+        nameTextField.setText(name);
+        avatarComboBox.getItems().add(avatarName);
+        avatarComboBox.getSelectionModel().select(avatarName);
+    }
+
+    private void removePlayer(Player player, PlayerListCell cell) {
+        _players.remove(player);
+        namesListView.getItems().remove(cell);
+        avatarListView.getItems().remove(player.getAvatar());
     }
 
     /**
@@ -105,5 +135,9 @@ public class FrontPageController extends Controller {
     @Override
     protected void loadPane(String fileName) {
         super.loadPane(fileName, anchorPane);
+    }
+
+    public static FrontPageController getInstance() {
+        return INSTANCE;
     }
 }
