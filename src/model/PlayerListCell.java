@@ -35,6 +35,7 @@ public class PlayerListCell extends HBox {
         _delete.setId("deleteButton");
         _delete.setOnMouseEntered(event -> _delete.setStyle("-fx-background-color: red; -fx-text-fill: white"));
         _delete.setOnMouseExited(event -> _delete.setStyle(""));
+        _delete.setOnAction(event -> FrontPageController.getInstance().removePlayer(player, this));
 
         this.getChildren().addAll(_name, _edit, _delete);
     }

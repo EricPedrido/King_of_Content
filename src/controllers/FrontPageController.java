@@ -16,6 +16,7 @@ import model.PlayerListCell;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -40,6 +41,7 @@ public class FrontPageController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         INSTANCE = this;
         _players = new ArrayList<>();
+
         // Set-up empty observable lists
         ObservableList<PlayerListCell> emptyPlayers = FXCollections.observableArrayList();
         ObservableList<ImageView> emptyAvatars = FXCollections.observableArrayList();
@@ -51,6 +53,7 @@ public class FrontPageController extends Controller {
         // set listeners and on-action events
         nameTextField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
         addButton.setOnAction(event -> onAddClicked());
+        quitButton.setOnAction(event -> onQuitClicked());
     }
 
     /**
@@ -96,21 +99,42 @@ public class FrontPageController extends Controller {
         avatarComboBox.getSelectionModel().selectFirst();
     }
 
+    private void onQuitClicked() {
+        quit();
+        setQuitBoxOpacity(false);
+    }
+
+    @Override
+    public void setQuitBoxOpacity(boolean transparent) {
+        super.setQuitBoxOpacity(transparent);
+        setElementsDisable(!transparent);
+    }
+
+    private void setElementsDisable(boolean disable) {
+        addButton.setDisable(disable);
+        nameTextField.setDisable(disable);
+        avatarComboBox.setDisable(disable);
+        avatarListView.setDisable(disable);
+        namesListView.setDisable(disable);
+        playButton.setDisable(disable);
+        quitButton.setDisable(disable);
+    }
+
     public void onEditClicked(Player player, PlayerListCell cell) {
         removePlayer(player, cell);
 
-        String name = player.getName();
-        String avatarName = player.getAvatar().getId();
-
-        nameTextField.setText(name);
-        avatarComboBox.getItems().add(avatarName);
-        avatarComboBox.getSelectionModel().select(avatarName);
+        nameTextField.setText(player.getName());
+        avatarComboBox.getSelectionModel().select(player.getAvatar().getId());
     }
 
-    private void removePlayer(Player player, PlayerListCell cell) {
+    public void removePlayer(Player player, PlayerListCell cell) {
         _players.remove(player);
+
         namesListView.getItems().remove(cell);
         avatarListView.getItems().remove(player.getAvatar());
+
+        avatarComboBox.getItems().add(player.getAvatar().getId());
+        Collections.sort(avatarComboBox.getItems());
     }
 
     /**
