@@ -54,6 +54,7 @@ public class FrontPageController extends Controller {
         nameTextField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
         addButton.setOnAction(event -> onAddClicked());
         quitButton.setOnAction(event -> onQuitClicked());
+        playButton.setOnAction(event -> onPlayClicked());
     }
 
     /**
@@ -93,7 +94,6 @@ public class FrontPageController extends Controller {
         nameTextField.setText("");
         addButton.setDisable(true);
         playButton.setDisable(false);
-
         // Ensure each avatar is unique
         avatarComboBox.getItems().remove(avatar);
         avatarComboBox.getSelectionModel().selectFirst();
@@ -102,6 +102,10 @@ public class FrontPageController extends Controller {
     private void onQuitClicked() {
         quit();
         setQuitBoxOpacity(false);
+    }
+
+    private void onPlayClicked() {
+        this.loadPane("/play_page.fxml");
     }
 
     @Override
