@@ -13,6 +13,18 @@
     -fx-font-size: 17;
 }
 
+.text {
+    -fx-text-fill: #fbb03b;
+}
+
+.tab-text {
+    -fx-font-family: "Russo One";
+    -fx-text-fill: BLACK;
+    -fx-stroke: WHITE;
+    -fx-stroke-width: 1;
+    -fx-opacity: 0.5;
+}
+
 .button {
     -fx-text-fill: #fbb03b;
     -fx-base: #444444;
