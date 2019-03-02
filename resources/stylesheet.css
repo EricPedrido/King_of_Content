@@ -6,28 +6,49 @@
     -fx-background-color: #111111;
 }
 
-.base {
+.tab-text-main {
     -fx-font-family: "Russo One";
-    -fx-base: #fbb03b;
-    -fx-background-radius: 0;
-    -fx-font-size: 17;
-}
-
-.text {
-    -fx-text-fill: #fbb03b;
-}
-
-.tab-text {
-    -fx-font-family: "Russo One";
-    -fx-text-fill: BLACK;
-    -fx-stroke: WHITE;
+    -fx-fill: WHITE;
+    -fx-opacity: 1;
     -fx-stroke-width: 1;
+}
+
+.tab-text-header {
+    -fx-fill: BLACK;
+    -fx-stroke: WHITE;
     -fx-opacity: 0.5;
 }
 
+.base {
+    -fx-font-family: "Russo One";
+    -fx-background-radius: 0;
+    -fx-base: #fbb03b;
+    -fx-font-size: 17;
+}
+
 .button {
-    -fx-text-fill: #fbb03b;
     -fx-base: #444444;
+    -fx-text-fill: #fbb03b;
+}
+
+.media-storm-button {
+    -fx-base: #333333;
+    -fx-text-fill: YELLOW;
+}
+
+.red-base {
+    -fx-base: RED;
+    -fx-text-fill: WHITE;
+}
+
+.green-base {
+    -fx-base: GREEN;
+    -fx-text-fill: WHITE;
+}
+
+.yellow-base {
+    -fx-base: YELLOW;
+    -fx-text-fill: #444444;
 }
 
 .play-quit {

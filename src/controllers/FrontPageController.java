@@ -37,6 +37,7 @@ public class FrontPageController extends Controller {
 
     private List<Player> _players;
 
+    //TODO Add color selector
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         INSTANCE = this;
