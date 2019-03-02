@@ -3,22 +3,21 @@ package controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import model.AvatarListCell;
+import model.Game;
 import model.Player;
 import model.PlayerListCell;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.rmi.activation.ActivationGroup_Stub;
+import java.util.*;
 
 /**
  * Controls front_page.fxml
@@ -32,16 +31,23 @@ public class FrontPageController extends Controller {
     @FXML public ListView<PlayerListCell> namesListView;
     @FXML public ListView<ImageView> avatarListView;
     @FXML public AnchorPane anchorPane;
+    @FXML public ColorPicker colorPicker;
+    @FXML public Rectangle color_box1, color_box2, color_box3, color_box4;
 
     private static FrontPageController INSTANCE;
 
     private List<Player> _players;
+    private List<Rectangle> _colorBoxes;
+    private Queue<Color> _defaultColors;
+    private List<Color> _usedColors;
 
-    //TODO Add color selector
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         INSTANCE = this;
         _players = new ArrayList<>();
+        _colorBoxes = Arrays.asList(color_box1, color_box2, color_box3, color_box4);
+        _defaultColors = new LinkedList<>(Arrays.asList(Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE));
+        _usedColors = new ArrayList<>();
 
         // Set-up empty observable lists
         ObservableList<PlayerListCell> emptyPlayers = FXCollections.observableArrayList();
@@ -78,12 +84,29 @@ public class FrontPageController extends Controller {
         image.setFitWidth(50);
         image.setId(avatar);
 
-        Player player = new Player(name, image);
+        Color color = colorPicker.getValue();
+
+        Player player = new Player(name, image, color);
         _players.add(player);
 
         // Add name and avatar to their respective lists
         namesListView.getItems().add(new PlayerListCell(player));
         avatarListView.getItems().add(image);
+
+        // Setup color boxes
+        if (color.equals(Color.WHITE)) { // If unchanged, load default color
+            Color nextCol = _defaultColors.peek();
+            if (_usedColors.contains(nextCol)) {
+                _defaultColors.remove();
+                _defaultColors.add(nextCol);
+            }
+            player.setColor(_defaultColors.poll());
+            _defaultColors.add(player.getColor());
+            _usedColors.add(player.getColor());
+        }
+
+        updateColorBoxes();
+        colorPicker.setValue(Color.WHITE);
 
         // Restrict users from exceeding maximum player count
         if (namesListView.getItems().size() == 4) {
@@ -106,7 +129,22 @@ public class FrontPageController extends Controller {
     }
 
     private void onPlayClicked() {
+        Game.newGame(_players);
+        _game = Game.getInstance();
+
         this.loadPane("/play_page.fxml");
+    }
+
+    private void updateColorBoxes() {
+        for (Rectangle colorBox : _colorBoxes) {
+            colorBox.setVisible(false);
+        }
+
+        for (int i = 0; i < _players.size(); i++) {
+            Rectangle currentBox = _colorBoxes.get(i);
+            currentBox.setVisible(true);
+            currentBox.setFill(_players.get(i).getColor());
+        }
     }
 
     @Override
@@ -134,12 +172,19 @@ public class FrontPageController extends Controller {
 
     public void removePlayer(Player player, PlayerListCell cell) {
         _players.remove(player);
+        _usedColors.remove(player.getColor());
+
+        updateColorBoxes();
 
         namesListView.getItems().remove(cell);
         avatarListView.getItems().remove(player.getAvatar());
 
         avatarComboBox.getItems().add(player.getAvatar().getId());
         Collections.sort(avatarComboBox.getItems());
+
+        nameTextField.setPromptText("Enter Name Here...");
+        nameTextField.setDisable(false);
+        avatarComboBox.setDisable(false);
     }
 
     /**

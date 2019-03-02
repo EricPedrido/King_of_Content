@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Game;
 
 import java.io.IOException;
 
@@ -20,6 +21,8 @@ import java.io.IOException;
  */
 public abstract class Controller implements Initializable {
     @FXML public Rectangle quitRectangle;
+
+    protected Game _game;
 
     protected static final int NUM_AVATARS = 8;
 
