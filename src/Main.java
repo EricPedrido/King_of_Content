@@ -1,5 +1,6 @@
 import controllers.Controller;
 import controllers.FrontPageController;
+import controllers.PlayPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,10 +31,10 @@ public class Main extends Application {
 
                 stage.show();
 
-                if (FrontPageController.getInstance() == null) {
-                    // TODO MAKE THE OTHER PAGE RECTANGLE GO
+                if (PlayPageController.getInstance() == null) {
+                    FrontPageController.getInstance().setQuitBoxOpacity(true);
                 } else {
-                    FrontPageController.getInstance().setQuitBoxOpacity(false);
+                    PlayPageController.getInstance().setQuitBoxOpacity(true);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

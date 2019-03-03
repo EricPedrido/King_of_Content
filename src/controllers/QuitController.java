@@ -31,12 +31,10 @@ public class QuitController extends Controller {
         Stage stage = (Stage) noText.getScene().getWindow();
         stage.close();
 
-        FrontPageController.getInstance().setQuitBoxOpacity(true);
+        if (PlayPageController.getInstance() == null) {
+            FrontPageController.getInstance().setQuitBoxOpacity(false);
+        } else {
+            PlayPageController.getInstance().setQuitBoxOpacity(false);
+        }
     }
-
-    @Override
-    protected void loadPane(String fileName) {
-
-    }
-
 }

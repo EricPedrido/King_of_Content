@@ -1,6 +1,7 @@
 package model;
 
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -13,7 +14,7 @@ public class Player {
     private int _fans;
 
     private final static int START_MONEY = 75000;
-    private final static int START_FANS = 50000;
+    private final static int START_FANS = 0;
 
     public Player(String name, ImageView avatar, Color color) {
         _name = name;
@@ -36,8 +37,24 @@ public class Player {
         return _color;
     }
 
+    public int getMoney() {
+        return _money;
+    }
+
+    public int getFans() {
+        return _fans;
+    }
+
+    public String getColorAsString() {
+        return "#" + _color.toString().substring(2,8);
+    }
+
     public String getFirstName() {
-        return _name.substring(_name.indexOf(' '));
+        if (_name.contains(" ")) {
+            return _name.substring(0, _name.indexOf(' '));
+        } else {
+            return _name;
+        }
     }
 
     public ImageView getAvatar() {

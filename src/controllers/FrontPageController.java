@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -10,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import model.AvatarListCell;
 import model.Game;
 import model.Player;
@@ -24,7 +26,7 @@ import java.util.*;
  *
  * @author Eric Pedrido
  */
-public class FrontPageController extends Controller {
+public class FrontPageController extends PageController {
     @FXML public Button addButton, playButton, quitButton;
     @FXML public TextField nameTextField;
     @FXML public ComboBox<String> avatarComboBox;
@@ -32,7 +34,7 @@ public class FrontPageController extends Controller {
     @FXML public ListView<ImageView> avatarListView;
     @FXML public AnchorPane anchorPane;
     @FXML public ColorPicker colorPicker;
-    @FXML public Rectangle color_box1, color_box2, color_box3, color_box4;
+    @FXML public Rectangle color_box1, color_box2, color_box3, color_box4, quitRectangle;
 
     private static FrontPageController INSTANCE;
 
@@ -125,14 +127,12 @@ public class FrontPageController extends Controller {
 
     private void onQuitClicked() {
         quit();
-        setQuitBoxOpacity(false);
+        setQuitBoxOpacity(true);
     }
 
     private void onPlayClicked() {
-        Game.newGame(_players);
-        _game = Game.getInstance();
-
-        this.loadPane("/play_page.fxml");
+        Game.newGame(new LinkedList<>(_players));
+        loadPane("/play_page.fxml");
     }
 
     private void updateColorBoxes() {
@@ -147,21 +147,11 @@ public class FrontPageController extends Controller {
         }
     }
 
-    @Override
-    public void setQuitBoxOpacity(boolean transparent) {
-        super.setQuitBoxOpacity(transparent);
-        setElementsDisable(!transparent);
+    public void setQuitBoxOpacity(boolean visible) {
+        quitRectangle.setVisible(visible);
+        anchorPane.setDisable(visible);
     }
 
-    private void setElementsDisable(boolean disable) {
-        addButton.setDisable(disable);
-        nameTextField.setDisable(disable);
-        avatarComboBox.setDisable(disable);
-        avatarListView.setDisable(disable);
-        namesListView.setDisable(disable);
-        playButton.setDisable(disable);
-        quitButton.setDisable(disable);
-    }
 
     public void onEditClicked(Player player, PlayerListCell cell) {
         removePlayer(player, cell);

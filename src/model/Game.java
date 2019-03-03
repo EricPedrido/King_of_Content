@@ -1,21 +1,19 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Game {
-    private List<Player> _players;
+    private Queue<Player> _players;
 
-    private static Game INSTANCE;
+    private static Game INSTANCE = new Game();
 
-    private Game(List<Player> players) {
-        _players = players;
+    public static void newGame(Queue<Player> players) {
+        INSTANCE._players = players;
     }
 
-    public static void newGame(List<Player> players) {
-        INSTANCE = new Game(players);
-    }
-
-    public List<Player> getPlayers() {
+    public Queue<Player> getPlayers() {
         return _players;
     }
 
