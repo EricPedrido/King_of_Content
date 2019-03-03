@@ -76,7 +76,7 @@ public class FrontPageController extends PageController {
      * Also clears {@link #nameTextField} for ease of use.
      */
     private void onAddClicked() {
-        // Setup the image of the avatar
+        // Setup the name, avatar, and color of the player
         String name = nameTextField.getText();
         String avatar = avatarComboBox.getSelectionModel().getSelectedItem();
 
@@ -117,29 +117,57 @@ public class FrontPageController extends PageController {
             avatarComboBox.setDisable(true);
         }
 
+        // Prepare UI for next player to add
         nameTextField.setText("");
         addButton.setDisable(true);
         playButton.setDisable(false);
+
         // Ensure each avatar is unique
         avatarComboBox.getItems().remove(avatar);
         avatarComboBox.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Exits out of the game
+     */
     private void onQuitClicked() {
         quit();
         setQuitBoxOpacity(true);
     }
 
+    /**
+     * Creates a new game with the current players and loads the main game window.
+     */
     private void onPlayClicked() {
         Game.newGame(new LinkedList<>(_players));
         loadPane("/play_page.fxml");
     }
 
+    /**
+     * Edit the Player's detail by removing the player altogether,
+     * but pre-selecting the Player's attributes.
+     *
+     * @param player Player that needs to be edited
+     * @param cell The cell on the listView which is edited
+     */
+    public void onEditClicked(Player player, PlayerListCell cell) {
+        removePlayer(player, cell);
+
+        nameTextField.setText(player.getName());
+        avatarComboBox.getSelectionModel().select(player.getAvatar().getId());
+        colorPicker.setValue(player.getColor());
+    }
+
+    /**
+     * Matches the players' color boxes with their position on the list.
+     */
     private void updateColorBoxes() {
+        // Reset all color boxes
         for (Rectangle colorBox : _colorBoxes) {
             colorBox.setVisible(false);
         }
 
+        // Set the color of each box to match the player in that position
         for (int i = 0; i < _players.size(); i++) {
             Rectangle currentBox = _colorBoxes.get(i);
             currentBox.setVisible(true);
@@ -147,31 +175,28 @@ public class FrontPageController extends PageController {
         }
     }
 
-    public void setQuitBoxOpacity(boolean visible) {
-        quitRectangle.setVisible(visible);
-        anchorPane.setDisable(visible);
-    }
-
-
-    public void onEditClicked(Player player, PlayerListCell cell) {
-        removePlayer(player, cell);
-
-        nameTextField.setText(player.getName());
-        avatarComboBox.getSelectionModel().select(player.getAvatar().getId());
-    }
-
+    /**
+     * Removes the Player from the system and from the UI
+     *
+     * @param player Player to remove
+     * @param cell Cell where the player was removed from
+     */
     public void removePlayer(Player player, PlayerListCell cell) {
+        // Remove player from system
         _players.remove(player);
         _usedColors.remove(player.getColor());
 
         updateColorBoxes();
 
+        // Visibly remove the player from the UI
         namesListView.getItems().remove(cell);
         avatarListView.getItems().remove(player.getAvatar());
 
+        // Return the removed player's avatar to the avatar comboBox
         avatarComboBox.getItems().add(player.getAvatar().getId());
         Collections.sort(avatarComboBox.getItems());
 
+        // Reset the components
         nameTextField.setPromptText("Enter Name Here...");
         nameTextField.setDisable(false);
         avatarComboBox.setDisable(false);
@@ -194,6 +219,12 @@ public class FrontPageController extends PageController {
         avatarComboBox.setCellFactory(c -> new AvatarListCell());
         avatarComboBox.setButtonCell(new AvatarListCell());
         avatarComboBox.getSelectionModel().selectFirst();
+    }
+
+    @Override
+    public void setQuitBoxOpacity(boolean visible) {
+        quitRectangle.setVisible(visible);
+        anchorPane.setDisable(visible);
     }
 
     @Override

@@ -46,6 +46,16 @@ public class PlayPageController extends PageController {
         INSTANCE = this;
         _players = Game.getInstance().getPlayers();
 
+        setupPlayers();
+
+    }
+
+    /**
+     * Initialise the tab and tab contents for each player.
+     * Each player's tab contains an anchorPane which loads <q>player_pane.fxml</q> into it.
+     * A loading screen appears until all players' tabs have successfully loaded.
+     */
+    private void setupPlayers() {
         setLoading(true);
 
         Task task1 = new Task() {
@@ -54,6 +64,7 @@ public class PlayPageController extends PageController {
                 for (Player player : _players) {
                     Tab tab = new Tab();
 
+                    // Setup the AnchorPane to have matching colors, names and avatar selected by user in another thread
                     Task task = new Task() {
                         @Override
                         protected Object call() throws Exception {
@@ -69,6 +80,8 @@ public class PlayPageController extends PageController {
                             return null;
                         }
                     };
+
+                    // Add tab to the TabPane when fully setup
                     task.setOnSucceeded(event -> player_tabPane.getTabs().add(tab));
 
                     Thread thread = new Thread(task);
@@ -78,13 +91,18 @@ public class PlayPageController extends PageController {
                 return null;
             }
         };
-
         task1.setOnSucceeded(event -> setLoading(false));
+
         Thread thread1 = new Thread(task1);
         thread1.setDaemon(true);
         thread1.start();
     }
 
+    /**
+     * Show the loading animation and text while processes are being run in the background
+     *
+     * @param load true if loading screen is shown, otherwise false.
+     */
     private void setLoading(boolean load) {
         loading_progress.setVisible(load);
         loading_text.setVisible(load);
@@ -94,6 +112,8 @@ public class PlayPageController extends PageController {
     @Override
     public void setQuitBoxOpacity(boolean visible) {
         quitRectangle.setVisible(visible);
+
+        // Disable buttons in the background of the quit popup to restrict activity to the quit window
         trade_button.setDisable(visible);
         end_turn_button.setDisable(visible);
     }
@@ -103,6 +123,7 @@ public class PlayPageController extends PageController {
         super.loadPane(fileName, play_pane);
     }
 
+    @Override
     protected void loadPane(String fileName, AnchorPane tabContent) {
         super.loadPane(fileName, tabContent);
     }
