@@ -46,8 +46,8 @@ public class PlayPageController extends PageController {
         INSTANCE = this;
         _players = Game.getInstance().getPlayers();
 
+        loadPane("/play_roll.fxml");
         setupPlayers();
-
     }
 
     /**
@@ -110,7 +110,7 @@ public class PlayPageController extends PageController {
     }
 
     @Override
-    public void setQuitBoxOpacity(boolean visible) {
+    public void setQuitBoxOpacity(boolean visible) { // TODO Instead of a quit rectangle, replace with anchorpane disable
         quitRectangle.setVisible(visible);
 
         // Disable buttons in the background of the quit popup to restrict activity to the quit window

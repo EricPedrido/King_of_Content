@@ -8,6 +8,7 @@
 
 .tab-text-main {
     -fx-font-family: "Russo One";
+    -fx-font-size: 25px;
     -fx-fill: WHITE;
     -fx-opacity: 1;
     -fx-stroke-width: 1;

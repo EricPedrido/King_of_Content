@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="386.0" style="-fx-background-color: #fbb03b;" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerPaneController">
+<AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="386.0" style="-fx-background-color: #fbb03b;" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerPaneController">
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff4d" height="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="386.0" />
    <Text fx:id="name_text" layoutX="90.0" layoutY="54.0" opacity="0.5" stroke="WHITE" strokeType="OUTSIDE" text="Player Name">
       <font>
@@ -23,12 +23,12 @@
          <String fx:value="tab-text-main" />
       </styleClass>
    </Text>
-   <Text fill="#009700" layoutX="14.0" layoutY="129.0" stroke="#009700" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tab-text-main" text="Money: $" wrappingWidth="120.08500671386719">
+   <Text fill="#009700" layoutX="14.0" layoutY="129.0" stroke="#009700" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" styleClass="tab-text-main" text="Money: $" wrappingWidth="120.08500671386719">
       <font>
          <Font size="25.0" />
       </font>
    </Text>
-   <Text fill="#003696" layoutX="13.0" layoutY="167.0" stroke="#003696" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tab-text-main" text="Fans:" wrappingWidth="104.08500671386719">
+   <Text fill="#003696" layoutX="13.0" layoutY="167.0" stroke="#003696" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25;" styleClass="tab-text-main" text="Fans:" wrappingWidth="104.08500671386719">
       <font>
          <Font size="25.0" />
       </font>
@@ -43,7 +43,7 @@
          <ColorAdjust contrast="0.88" />
       </effect>
    </ProgressBar>
-   <Text fx:id="fans_text" fill="WHITE" layoutX="115.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-stroke: #003696;" styleClass="tab-text-main" text="999,999/1,000,000" textAlignment="CENTER" wrappingWidth="254.8999786376953">
+   <Text fx:id="fans_text" fill="WHITE" layoutX="115.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-stroke: #003696; -fx-font-size: 20;" styleClass="tab-text-main" text="999,999/1,000,000" textAlignment="CENTER" wrappingWidth="254.8999786376953">
       <font>
          <Font size="20.0" />
       </font>
