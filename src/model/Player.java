@@ -3,6 +3,7 @@ package model;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import model.tiles.Tile;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,8 +52,7 @@ public class Player {
         }
 
         positionAnimation();
-//        Board tile = Board.values()[_position];
-//        setPosition(tile.getX(), tile.getY());
+
     }
 
     public void setPosition(int x, int y) {
@@ -62,15 +62,17 @@ public class Player {
 
     private void positionAnimation() {
         Board[] board = Board.values();
+        Player player = this;
 
         Timer timer = new Timer(true);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Board tile = board[_index];
-                setPosition(tile.getX(), tile.getY());
+                Board boardPos = board[_index];
+                setPosition(boardPos.getX(), boardPos.getY());
                 if (board[_index] == board[_position]) {
                     timer.cancel();
+                    boardPos.onLand(player);
                 } else {
                     if ((_index + 1) == (board.length - 1)) {
                         _index = 0;

@@ -25,6 +25,7 @@ public class Game {
 
         int rollOne = (int) ((Math.random()*6)+1);
         int rollTwo = (int) ((Math.random()*6)+1);
+
         _roll = rollOne + rollTwo;
 
         output.add(rollOne);
@@ -34,10 +35,6 @@ public class Game {
         _currentPlayer.addRolled(_roll);
 
         return output;
-    }
-
-    public Player getCurrentPlayer() {
-        return _currentPlayer;
     }
 
     public Queue<Player> getPlayers() {

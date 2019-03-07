@@ -59,6 +59,10 @@ public enum Board {
         _tile = tile;
     }
 
+    public void onLand(Player player) {
+        _tile.onLand(player);
+    }
+
     public int getX() {
         return _tile.getX();
     }

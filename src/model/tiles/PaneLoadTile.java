@@ -14,10 +14,10 @@ public class PaneLoadTile extends Tile {
 
     @Override
     public void onLand(Player player) {
-        if (!_pane.toString().equals("")) {
-            PlayPageController.getInstance().loadPane(_pane);
+        if (_pane.toString().equals("")) {
+            System.out.println("PaneChanged:" + _pane.toString());
         } else {
-            System.out.println("PaneChanged");
+            PlayPageController.getInstance().loadPane(_pane);
         }
     }
 }

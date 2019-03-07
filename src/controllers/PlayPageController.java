@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -124,7 +125,7 @@ public class PlayPageController extends PageController {
     }
 
     public void loadPane(Pane pane) {
-        this.loadPane(pane.toString());
+        Platform.runLater(() -> loadPane(pane.toString()));
     }
 
     @Override

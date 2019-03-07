@@ -11,7 +11,6 @@ public enum Pane {
         _dir = "/play_" + dir + ".fxml";
     }
 
-
     @Override
     public String toString() {
         return _dir;
