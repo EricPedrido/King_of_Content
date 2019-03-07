@@ -58,4 +58,12 @@ public enum Board {
     Board(Tile tile) {
         _tile = tile;
     }
+
+    public int getX() {
+        return _tile.getX();
+    }
+
+    public int getY() {
+        return _tile.getY();
+    }
 }

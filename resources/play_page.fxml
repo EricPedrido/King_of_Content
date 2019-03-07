@@ -38,6 +38,7 @@
    </Text>
    <Button fx:id="trade_button" layoutX="983.0" layoutY="505.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="102.0" styleClass="base" text="Trade" />
    <Button fx:id="end_turn_button" layoutX="1092.0" layoutY="505.0" mnemonicParsing="false" styleClass="base" text="End Turn" />
+   <AnchorPane fx:id="play_pane" layoutX="895.0" prefHeight="491.0" prefWidth="386.0" />
    <Rectangle fx:id="quitRectangle" arcHeight="5.0" arcWidth="5.0" height="720.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="1280.0" />
    <Text fx:id="loading_text" layoutX="520.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 50; -fx-fill: #444444;" styleClass="base" text="Loading..." textAlignment="CENTER" visible="false">
       <font>
@@ -45,5 +46,4 @@
       </font>
    </Text>
    <ProgressIndicator fx:id="loading_progress" layoutX="490.0" layoutY="80.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="314.0" prefWidth="300.0" style="-fx-accent: #fbb03b;" visible="false" />
-   <AnchorPane fx:id="play_pane" layoutX="895.0" prefHeight="491.0" prefWidth="386.0" />
 </AnchorPane>

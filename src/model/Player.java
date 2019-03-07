@@ -4,6 +4,8 @@ package model;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
+import static model.Board.UPLOAD;
+
 public class Player {
     private String _name;
     private ImageView _avatar;
@@ -13,6 +15,8 @@ public class Player {
 
     private final static int START_MONEY = 75000;
     private final static int START_FANS = 0;
+    private final static int START_FIT_HEIGHT = 22;
+    private final static int START_FIT_WIDTH = 26;
 
     public Player(String name, ImageView avatar, Color color) {
         _name = name;
@@ -21,6 +25,12 @@ public class Player {
 
         _money = START_MONEY;
         _fans = START_FANS;
+    }
+
+    public void setStartingPosition() {
+        _avatar.setFitHeight(START_FIT_HEIGHT);
+        _avatar.setFitWidth(START_FIT_WIDTH);
+        this.setPosition(UPLOAD.getX(), UPLOAD.getY());
     }
 
     public void setPosition(int x, int y) {
