@@ -12,7 +12,7 @@ public enum Board {
     GREEN_2(new PaneLoadTile(843,349, PURCHASABLE)),
     DEMONETISED(new DirectEffectTile(825, 310, -10000, 0)),
     BRAND_DEAL_1(new DirectEffectTile(821, 272)),
-    ORANGE_1(new PaneLoadTile(844, 283, PURCHASABLE)),
+    ORANGE_1(new PaneLoadTile(844, 233, PURCHASABLE)),
     RISK_1(new PaneLoadTile(829, 196, RISK)),
     ORANGE_2(new PaneLoadTile(843, 159, PURCHASABLE)),
     ORANGE_3(new PaneLoadTile(843, 119, PURCHASABLE)),

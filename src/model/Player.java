@@ -3,7 +3,9 @@ package model;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import model.tiles.Tile;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static model.Board.UPLOAD;
 
@@ -14,6 +16,8 @@ public class Player {
     private int _money;
     private int _fans;
     private int _position;
+
+    private int _index;
 
     private final static int START_MONEY = 75000;
     private final static int START_FANS = 0;
@@ -28,6 +32,7 @@ public class Player {
         _money = START_MONEY;
         _fans = START_FANS;
         _position = 0;
+        _index = 0;
     }
 
     public void setStartingPosition() {
@@ -45,13 +50,36 @@ public class Player {
             _position = boardSize - roll;
         }
 
-        Board tile = Board.values()[_position];
-        setPosition(tile.getX(), tile.getY());
+        positionAnimation();
+//        Board tile = Board.values()[_position];
+//        setPosition(tile.getX(), tile.getY());
     }
 
     public void setPosition(int x, int y) {
         _avatar.setX(x-10);
         _avatar.setY(y-2);
+    }
+
+    private void positionAnimation() {
+        Board[] board = Board.values();
+
+        Timer timer = new Timer(true);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Board tile = board[_index];
+                setPosition(tile.getX(), tile.getY());
+                if (board[_index] == board[_position]) {
+                    timer.cancel();
+                } else {
+                    if ((_index + 1) == (board.length - 1)) {
+                        _index = 0;
+                    } else {
+                        _index++;
+                    }
+                }
+            }
+        }, 0, 300);
     }
 
     public void addMoney(int add) {
