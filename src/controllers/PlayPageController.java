@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import model.Game;
 import model.Player;
+import model.tiles.Pane;
 
 import java.net.URL;
 import java.util.Queue;
@@ -40,6 +41,7 @@ public class PlayPageController extends PageController {
     private static PlayPageController INSTANCE;
 
     private Queue<Player> _players;
+    //TODO KEEP TRACK OF WHOS TURN IT IS, AND DISABLE OTHER PLAYTER TABS
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -116,6 +118,10 @@ public class PlayPageController extends PageController {
         // Disable buttons in the background of the quit popup to restrict activity to the quit window
         trade_button.setDisable(visible);
         end_turn_button.setDisable(visible);
+    }
+
+    public void loadPane(Pane pane) {
+        this.loadPane(pane.toString());
     }
 
     @Override

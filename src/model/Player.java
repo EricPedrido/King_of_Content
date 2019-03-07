@@ -1,10 +1,8 @@
 package model;
 
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class Player {
     private String _name;
@@ -23,6 +21,25 @@ public class Player {
 
         _money = START_MONEY;
         _fans = START_FANS;
+    }
+
+    public void setPosition(int x, int y) {
+        _avatar.setX(x);
+        _avatar.setY(y);
+    }
+
+    public void addMoney(int add) {
+        _money += add;
+    }
+
+    public void addFans(int add) {
+        if ((_fans + add) >= 1000000) {
+            // TODO WIN THE GAME
+        } else if ((_fans + add) <= 0) {
+            _fans = 0;
+        } else {
+            _fans += add;
+        }
     }
 
     public void setColor(Color color) {
