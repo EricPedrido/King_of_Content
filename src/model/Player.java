@@ -34,8 +34,8 @@ public class Player {
     }
 
     public void setPosition(int x, int y) {
-        _avatar.setX(x);
-        _avatar.setY(y);
+        _avatar.setX(x-10);
+        _avatar.setY(y-6);
     }
 
     public void addMoney(int add) {
@@ -45,6 +45,7 @@ public class Player {
     public void addFans(int add) {
         if ((_fans + add) >= 1000000) {
             // TODO WIN THE GAME
+            System.out.println("Winner: " + _name);
         } else if ((_fans + add) <= 0) {
             _fans = 0;
         } else {

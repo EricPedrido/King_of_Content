@@ -53,62 +53,19 @@ public class PlayPageController extends PageController {
 
         loadPane("/play_roll.fxml");
 
-//        for (Player player : _players) {
-//            player.setStartingPosition();
-//            anchorPane.getChildren().add(player.getAvatar());
-//        }
+        for (Player player : _players) {
+            player.setStartingPosition();
+            anchorPane.getChildren().add(player.getAvatar());
+        }
 
         setupPlayers();
     }
 
-//    /**
-//     * Initialise the tab and tab contents for each player.
-//     * Each player's tab contains an anchorPane which loads <q>player_pane.fxml</q> into it.
-//     * A loading screen appears until all players' tabs have successfully loaded.
-//     */
-//    private void setupPlayers() {
-//        setLoading(true);
-//
-//        Task task1 = new Task() {
-//            @Override
-//            protected Object call() throws Exception {
-//                for (Player player : _players) {
-//                    Tab tab = new Tab();
-//
-//                    // Setup the AnchorPane to have matching colors, names and avatar selected by user in another thread
-//                    Task task = new Task() {
-//                        @Override
-//                        protected Object call() throws Exception {
-//                            tab.setText(player.getFirstName());
-//                            tab.getStyleClass().add("base");
-//                            tab.setStyle("-fx-base: " + player.getColorAsString());
-//
-//                            AnchorPane tabContent = new AnchorPane();
-//                            tabContent.setPrefSize(386, 460);
-//                            loadPane("/player_pane.fxml", tabContent);
-//                            tab.setContent(tabContent);
-//
-//                            return null;
-//                        }
-//                    };
-//
-//                    // Add tab to the TabPane when fully setup
-//                    task.setOnSucceeded(event -> player_tabPane.getTabs().add(tab));
-//
-//                    Thread thread = new Thread(task);
-//                    thread.setDaemon(true);
-//                    thread.start();
-//                }
-//                return null;
-//            }
-//        };
-//        task1.setOnSucceeded(event -> setLoading(false));
-//
-//        Thread thread1 = new Thread(task1);
-//        thread1.setDaemon(true);
-//        thread1.start();
-//    }
-
+    /**
+     * Initialise the tab and tab contents for each player.
+     * Each player's tab contains an anchorPane which loads <q>player_pane.fxml</q> into it.
+     * A loading screen appears until all players' tabs have successfully loaded.
+     */
     private void setupPlayers() {
         setLoading(true);
 
