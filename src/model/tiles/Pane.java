@@ -1,7 +1,7 @@
 package model.tiles;
 
 public enum Pane {
-    FAN_MAIL("fan_mail"), RISK("risk"), MEDIA_STORM("media_storm"), PURCHASABLE("purchasable"),
+    ROLL("roll"), FAN_MAIL("fan_mail"), RISK("risk"), MEDIA_STORM("media_storm"), PURCHASABLE("purchasable"),
     //TODO FIGURE ALL THIS SHIT OUT
     CONT_CON(""), TEMP("");
 

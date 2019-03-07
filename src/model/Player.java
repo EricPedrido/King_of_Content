@@ -1,6 +1,8 @@
 package model;
 
 
+import controllers.PlayPageController;
+import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import model.tiles.Tile;
@@ -17,6 +19,7 @@ public class Player {
     private int _money;
     private int _fans;
     private int _position;
+    private Tab _tab;
 
     private int _index;
 
@@ -52,7 +55,6 @@ public class Player {
         }
 
         positionAnimation();
-
     }
 
     public void setPosition(int x, int y) {
@@ -73,6 +75,7 @@ public class Player {
                 if (board[_index] == board[_position]) {
                     timer.cancel();
                     boardPos.onLand(player);
+                    PlayPageController.getInstance().disableButtons(false);
                 } else {
                     if ((_index + 1) == (board.length - 1)) {
                         _index = 0;
@@ -99,8 +102,16 @@ public class Player {
         }
     }
 
+    public void setTab(Tab tab) {
+        _tab = tab;
+    }
+
     public void setColor(Color color) {
         _color = color;
+    }
+
+    public Tab getTab() {
+        return _tab;
     }
 
     public String getName() {

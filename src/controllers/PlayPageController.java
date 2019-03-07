@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import model.Board;
 import model.Game;
 import model.Player;
 import model.tiles.Pane;
@@ -20,7 +19,6 @@ import model.tiles.Pane;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.ResourceBundle;
 
 public class PlayPageController extends PageController {
@@ -54,7 +52,7 @@ public class PlayPageController extends PageController {
         _game = Game.getInstance();
         _players = new ArrayList<>(_game.getPlayers());
 
-        loadPane("/play_roll.fxml");
+        loadPane(Pane.ROLL.toString());
 
         for (Player player : _players) {
             player.setStartingPosition();
@@ -62,6 +60,14 @@ public class PlayPageController extends PageController {
         }
 
         setupPlayers();
+
+        end_turn_button.setOnAction(event -> endTurn());
+    }
+
+    private void endTurn() {
+        _game.nextTurn();
+        player_tabPane.getSelectionModel().select(_game.getCurrentPlayer().getTab());
+        loadPane(Pane.ROLL.toString());
     }
 
     /**
@@ -91,6 +97,7 @@ public class PlayPageController extends PageController {
 
                     tab.setContent(tabContent);
                     tabs.add(tab);
+                    player.setTab(tab);
                 }
                 return null;
             }
@@ -102,6 +109,11 @@ public class PlayPageController extends PageController {
         Thread thread = new Thread(task);
         thread.start();
 
+    }
+
+    public void disableButtons(boolean disable) {
+        trade_button.setDisable(disable);
+        end_turn_button.setDisable(disable);
     }
 
     /**

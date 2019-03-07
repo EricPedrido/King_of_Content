@@ -1,5 +1,7 @@
 package model;
 
+import controllers.PlayPageController;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -22,6 +24,7 @@ public class Game {
 
     public Queue<Integer> roll() {
         Queue<Integer> output = new LinkedList<>();
+        PlayPageController.getInstance().disableButtons(true);
 
         int rollOne = (int) ((Math.random()*6)+1);
         int rollTwo = (int) ((Math.random()*6)+1);
@@ -35,6 +38,10 @@ public class Game {
         _currentPlayer.addRolled(_roll);
 
         return output;
+    }
+
+    public Player getCurrentPlayer() {
+        return _currentPlayer;
     }
 
     public Queue<Player> getPlayers() {
