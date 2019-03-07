@@ -43,13 +43,15 @@ public class PlayPageController extends PageController {
 
     private static PlayPageController INSTANCE;
 
+    private Game _game;
     private List<Player> _players;
     //TODO KEEP TRACK OF WHOS TURN IT IS, AND DISABLE OTHER PLAYER TABS
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         INSTANCE = this;
-        _players = new ArrayList<>(Game.getInstance().getPlayers());
+        _game = Game.getInstance();
+        _players = new ArrayList<>(_game.getPlayers());
 
         loadPane("/play_roll.fxml");
 

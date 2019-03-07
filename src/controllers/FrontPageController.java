@@ -139,7 +139,7 @@ public class FrontPageController extends PageController {
      * Creates a new game with the current players and loads the main game window.
      */
     private void onPlayClicked() {
-        Game.newGame(new LinkedList<>(_players));
+        Game.getInstance().newGame(new LinkedList<>(_players));
         loadPane("/play_page.fxml");
     }
 

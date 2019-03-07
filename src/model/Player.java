@@ -3,6 +3,7 @@ package model;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import model.tiles.Tile;
 
 import static model.Board.UPLOAD;
 
@@ -12,6 +13,7 @@ public class Player {
     private Color _color;
     private int _money;
     private int _fans;
+    private int _position;
 
     private final static int START_MONEY = 75000;
     private final static int START_FANS = 0;
@@ -25,6 +27,7 @@ public class Player {
 
         _money = START_MONEY;
         _fans = START_FANS;
+        _position = 0;
     }
 
     public void setStartingPosition() {
@@ -33,9 +36,22 @@ public class Player {
         this.setPosition(UPLOAD.getX(), UPLOAD.getY());
     }
 
+    public void addRolled(int roll) {
+        final int boardSize = Board.values().length;
+
+        if ((_position + roll) < (boardSize - 1)) { // In case the player is about to pass "upload"
+            _position += roll;
+        } else {
+            _position = boardSize - roll;
+        }
+
+        Board tile = Board.values()[_position];
+        setPosition(tile.getX(), tile.getY());
+    }
+
     public void setPosition(int x, int y) {
         _avatar.setX(x-10);
-        _avatar.setY(y-6);
+        _avatar.setY(y-2);
     }
 
     public void addMoney(int add) {

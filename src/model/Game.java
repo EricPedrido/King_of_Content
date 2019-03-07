@@ -10,8 +10,14 @@ public class Game {
 
     private static Game INSTANCE = new Game();
 
-    public static void newGame(Queue<Player> players) {
-        INSTANCE._players = players;
+    public void newGame(Queue<Player> players) {
+        _players = players;
+        nextTurn();
+    }
+
+    public void nextTurn() {
+        _currentPlayer = _players.poll();
+        _players.add(_currentPlayer);
     }
 
     public Queue<Integer> roll() {
@@ -25,11 +31,9 @@ public class Game {
         output.add(rollTwo);
         output.add(_roll);
 
-        return output;
-    }
+        _currentPlayer.addRolled(_roll);
 
-    public int getRoll() {
-        return _roll;
+        return output;
     }
 
     public Player getCurrentPlayer() {
