@@ -28,6 +28,10 @@ public class Player {
     private final static int START_FIT_HEIGHT = 22;
     private final static int START_FIT_WIDTH = 26;
 
+    public Player(String name) {
+        this(name, null, null);
+    }
+
     public Player(String name, ImageView avatar, Color color) {
         _name = name;
         _avatar = avatar;
@@ -144,5 +148,9 @@ public class Player {
 
     public ImageView getAvatar() {
         return _avatar;
+    }
+
+    public boolean equals(String name) {
+        return this._name.equals(name);
     }
 }

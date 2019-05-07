@@ -104,11 +104,12 @@ public class PlayPageController extends PageController {
         };
         task.setOnSucceeded(event -> {
             player_tabPane.getTabs().addAll(tabs);
+            Game.getInstance().syncPlayerOrder(tabs);
             setLoading(false);
         });
         Thread thread = new Thread(task);
+        thread.setDaemon(true);
         thread.start();
-
     }
 
     public void disableButtons(boolean disable) {

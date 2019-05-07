@@ -25,7 +25,7 @@ public class PlayerPaneController extends Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set player and place on back of queue
-        _player = Game.getInstance().getPlayers().poll();
+        _player = Game.getInstance().getPlayers().remove(0);
         Game.getInstance().getPlayers().add(_player);
 
         // Set Player attributes to be displayed
