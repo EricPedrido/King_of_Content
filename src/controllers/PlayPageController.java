@@ -44,7 +44,6 @@ public class PlayPageController extends PageController {
 
     private Game _game;
     private List<Player> _players;
-    //TODO KEEP TRACK OF WHOS TURN IT IS, AND DISABLE OTHER PLAYER TABS
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

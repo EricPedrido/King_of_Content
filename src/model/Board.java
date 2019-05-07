@@ -25,7 +25,7 @@ public enum Board {
     PINK_1(new PaneLoadTile(592, 58, PURCHASABLE)),
     FAN_MAIL_2(new PaneLoadTile(554, 71, FAN_MAIL)),
     PINK_2(new PaneLoadTile(515,58, PURCHASABLE)),
-    PINK_3(new PaneLoadTile(578, 58, PURCHASABLE)),
+    PINK_3(new PaneLoadTile(478, 58, PURCHASABLE)),
     CONT_CON_TILE(new PaneLoadTile(431, 72, CONT_CON)),
     YELLOW_1(new PaneLoadTile(415, 119, PURCHASABLE)),
     RISK_2(new PaneLoadTile(430, 156, RISK)),

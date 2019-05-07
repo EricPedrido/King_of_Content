@@ -120,7 +120,9 @@ public class FrontPageController extends PageController {
         // Prepare UI for next player to add
         nameTextField.setText("");
         addButton.setDisable(true);
-        playButton.setDisable(false);
+        if (namesListView.getItems().size() > 1) {
+            playButton.setDisable(false);
+        }
 
         // Ensure each avatar is unique
         avatarComboBox.getItems().remove(avatar);
@@ -200,6 +202,9 @@ public class FrontPageController extends PageController {
         nameTextField.setPromptText("Enter Name Here...");
         nameTextField.setDisable(false);
         avatarComboBox.setDisable(false);
+        if (namesListView.getItems().size() < 2) {
+            playButton.setDisable(true);
+        }
     }
 
     /**
