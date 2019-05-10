@@ -1,8 +1,8 @@
 package model;
 
-import model.tiles.*;
-
-import javax.swing.plaf.SeparatorUI;
+import model.tiles.DirectEffectTile;
+import model.tiles.PaneLoadTile;
+import model.tiles.Tile;
 
 import static model.BoardPane.*;
 import static model.tiles.Pane.*;
@@ -62,15 +62,27 @@ public enum Board {
         _tile = tile;
     }
 
-    public void onLand(Player player) {
-        _tile.onLand(player);
-    }
+//    public void onLand(Player player) {
+//        _tile.onLand(player);
+//    }
 
-    public int getX() {
-        return _tile.getX();
-    }
+//    public int getX() {
+//        return _tile.getX();
+//    }
+//
+//    public int getY() {
+//        return _tile.getY();
+//    }
+//
+//    public int getPaneX() {
+//        return _tile.getPaneX();
+//    }
+//
+//    public int getPaneY() {
+//        return _tile.getPaneY();
+//    }
 
-    public int getY() {
-        return _tile.getY();
+    public Tile getTile() {
+        return _tile;
     }
 }

@@ -3,6 +3,7 @@ package model;
 
 import controllers.PlayPageController;
 import javafx.scene.control.Tab;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import model.tiles.Tile;
@@ -15,6 +16,7 @@ import static model.Board.UPLOAD;
 public class Player {
     private String _name;
     private ImageView _avatar;
+    private ImageView _paneAvatar;
     private Color _color;
     private int _money;
     private int _fans;
@@ -27,7 +29,11 @@ public class Player {
     private final static int START_FANS = 0;
     private final static int START_FIT_HEIGHT = 22;
     private final static int START_FIT_WIDTH = 26;
+    private final static int START_FIT_WIDTH_PANE = 36;
 
+    /**
+     * Constructor used for testing purposes.
+     * **/
     public Player(String name) {
         this(name, null, null);
     }
@@ -35,18 +41,26 @@ public class Player {
     public Player(String name, ImageView avatar, Color color) {
         _name = name;
         _avatar = avatar;
+        _paneAvatar = new ImageView(avatar.getImage());
         _color = color;
 
         _money = START_MONEY;
         _fans = START_FANS;
         _position = 0;
         _index = 0;
+
+        _paneAvatar.setPreserveRatio(true);
     }
 
     public void setStartingPosition() {
+        Tile upload = UPLOAD.getTile();
+
         _avatar.setFitHeight(START_FIT_HEIGHT);
         _avatar.setFitWidth(START_FIT_WIDTH);
-        this.setPosition(UPLOAD.getX(), UPLOAD.getY());
+        this.setPosition(upload.getX(), upload.getY());
+
+        _paneAvatar.setFitWidth(START_FIT_WIDTH_PANE);
+        this.setPanePosition(upload.getPaneX(), upload.getPaneY(), upload.getPaneView());
     }
 
     public void addRolled(int roll) {
@@ -66,7 +80,13 @@ public class Player {
         _avatar.setY(y-2);
     }
 
-    private void positionAnimation() {
+    public void setPanePosition(int paneX, int paneY, Image paneImage) {
+        _paneAvatar.setX(paneX);
+        _paneAvatar.setY(paneY);
+        PlayPageController.getInstance().setLaneImage(paneImage);
+    }
+
+    private void positionAnimation() { // TODO add animation for pane view
         Board[] board = Board.values();
         Player player = this;
 
@@ -75,10 +95,14 @@ public class Player {
             @Override
             public void run() {
                 Board boardPos = board[_index];
-                setPosition(boardPos.getX(), boardPos.getY());
+                Tile tile = boardPos.getTile();
+
+                setPosition(tile.getX(), tile.getY());
+                setPanePosition(tile.getPaneX(), tile.getPaneY(), tile.getPaneView());
+
                 if (board[_index] == board[_position]) {
                     timer.cancel();
-                    boardPos.onLand(player);
+                    tile.onLand(player);
                     PlayPageController.getInstance().disableButtons(false);
                 } else {
                     if ((_index + 1) == (board.length - 1)) {
@@ -148,6 +172,10 @@ public class Player {
 
     public ImageView getAvatar() {
         return _avatar;
+    }
+
+    public ImageView getPaneAvatar() {
+        return _paneAvatar;
     }
 
     public boolean equals(String name) {

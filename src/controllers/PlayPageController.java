@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -56,6 +57,7 @@ public class PlayPageController extends PageController {
         for (Player player : _players) {
             player.setStartingPosition();
             anchorPane.getChildren().add(player.getAvatar());
+            anchorPane.getChildren().add(player.getPaneAvatar());
         }
 
         setupPlayers();
@@ -109,6 +111,10 @@ public class PlayPageController extends PageController {
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
+    }
+
+    public void setLaneImage(Image image) {
+        lane_imageView.setImage(image);
     }
 
     public void disableButtons(boolean disable) {
