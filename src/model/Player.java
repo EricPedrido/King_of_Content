@@ -22,6 +22,7 @@ public class Player {
     private int _fans;
     private int _position;
     private Tab _tab;
+    private Image _laneImage;
 
     private int _index;
 
@@ -48,6 +49,7 @@ public class Player {
         _fans = START_FANS;
         _position = 0;
         _index = 0;
+        _laneImage = UPLOAD.getTile().getPaneView();
 
         _paneAvatar.setPreserveRatio(true);
     }
@@ -83,10 +85,19 @@ public class Player {
     public void setPanePosition(int paneX, int paneY, Image paneImage) {
         _paneAvatar.setX(paneX);
         _paneAvatar.setY(paneY);
-        PlayPageController.getInstance().setLaneImage(paneImage);
+
+        if (!paneImage.equals(_laneImage)) {
+            PlayPageController.getInstance().setLaneImage(paneImage);
+        }
+
+        _laneImage = paneImage;
     }
 
-    private void positionAnimation() { // TODO add animation for pane view
+    public void setAvatarVisible(boolean visible) {
+        _paneAvatar.setVisible(visible);
+    }
+
+    private void positionAnimation() { // TODO When avatar is in first or second position, does not appear on lane view
         Board[] board = Board.values();
         Player player = this;
 
@@ -140,6 +151,10 @@ public class Player {
 
     public Tab getTab() {
         return _tab;
+    }
+
+    public String getCurrentImage() {
+        return _laneImage.getUrl();
     }
 
     public String getName() {

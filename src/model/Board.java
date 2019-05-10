@@ -7,7 +7,7 @@ import model.tiles.Tile;
 import static model.BoardPane.*;
 import static model.tiles.Pane.*;
 
-public enum Board {
+public enum Board {//TODO lane view needs a SECOND view for when it is on the corners.
 
     UPLOAD(new DirectEffectTile(835, 465, 982,610, SIDE_1, 10000, 50000)),
     GREEN_1(new PaneLoadTile(843, 423, 348, 636, SIDE_2, PURCHASABLE)),

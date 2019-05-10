@@ -24,7 +24,7 @@ public class Game {
     }
 
     public void nextTurn() {
-        if (_counter == _players.size()) {
+        if (_counter == _players.size()-1) {
             _counter = 0;
         } else {
             _counter++;

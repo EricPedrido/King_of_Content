@@ -115,6 +115,10 @@ public class PlayPageController extends PageController {
 
     public void setLaneImage(Image image) {
         lane_imageView.setImage(image);
+
+        for (Player player : _players) {
+            player.setAvatarVisible(image.getUrl().equals(player.getCurrentImage()));
+        }
     }
 
     public void disableButtons(boolean disable) {
