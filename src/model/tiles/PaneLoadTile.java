@@ -8,7 +8,12 @@ public class PaneLoadTile extends Tile {
     private Pane _pane;
 
     public PaneLoadTile(int x, int y, int paneX, int paneY, BoardPane bPane, Pane pane) {
-        super(x, y, paneX, paneY, bPane);
+        this(x,y,paneX,paneY,0,0,bPane,null,pane);
+    }
+
+    public PaneLoadTile(int x, int y, int paneX, int paneY, int cornerPane_x, int cornerPane_y,
+                        BoardPane bPane, BoardPane cornerPane, Pane pane) {
+        super(x,y,paneX,paneY,cornerPane_x, cornerPane_y, bPane, cornerPane);
         _pane = pane;
     }
 

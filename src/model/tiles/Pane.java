@@ -2,7 +2,7 @@ package model.tiles;
 
 public enum Pane {
     ROLL("roll"), FAN_MAIL("fan_mail"), RISK("risk"), MEDIA_STORM("media_storm"), PURCHASABLE("purchasable"),
-    //TODO FIGURE ALL THIS SHIT OUT
+    //TODO Define classes for these types of Panes
     CONT_CON(""), TEMP("");
 
     private String _dir;

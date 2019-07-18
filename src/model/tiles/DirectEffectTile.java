@@ -13,7 +13,12 @@ public class DirectEffectTile extends Tile{
     }
 
     public DirectEffectTile(int x, int y, int paneX, int paneY, BoardPane bPane, int effectMoney, int effectFans) {
-        super(x, y, paneX, paneY, bPane);
+        this(x,y,paneX,paneY,0,0,bPane, null, effectMoney, effectFans);
+    }
+
+    public DirectEffectTile(int x, int y, int paneX, int paneY, int cornerPane_x, int cornerPane_y,
+                            BoardPane bPane, BoardPane cornerPane, int effectMoney, int effectFans) {
+        super(x, y, paneX, paneY, cornerPane_x, cornerPane_y, bPane, cornerPane);
         _effectMoney = effectMoney;
         _effectFans = effectFans;
     }
